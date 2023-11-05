@@ -11,7 +11,7 @@ namespace Burduhos_Raluca_Lab2.Models
         {
             var allCategories = context.Category;
             var bookCategories = new HashSet<int>(
-                book.BookCategories.Select(c => c.CategoryID)); // 
+            book.BookCategories.Select(c => c.CategoryID)); //
             AssignedCategoryDataList = new List<AssignedCategoryData>();
             foreach (var cat in allCategories)
             {
@@ -32,10 +32,9 @@ namespace Burduhos_Raluca_Lab2.Models
                 bookToUpdate.BookCategories = new List<BookCategory>();
                 return;
             }
-
             var selectedCategoriesHS = new HashSet<string>(selectedCategories);
             var bookCategories = new HashSet<int>
-                (bookToUpdate.BookCategories.Select(c => c.Category.ID));
+            (bookToUpdate.BookCategories.Select(c => c.Category.ID));
             foreach (var cat in context.Category)
             {
                 if (selectedCategoriesHS.Contains(cat.ID.ToString()))
@@ -43,11 +42,11 @@ namespace Burduhos_Raluca_Lab2.Models
                     if (!bookCategories.Contains(cat.ID))
                     {
                         bookToUpdate.BookCategories.Add(
-                            new BookCategory
-                            {
-                                BookID = bookToUpdate.ID,
-                                CategoryID = cat.ID
-                            });
+                        new BookCategory
+                        {
+                            BookID = bookToUpdate.ID,
+                            CategoryID = cat.ID
+                        });
                     }
                 }
                 else
@@ -55,9 +54,9 @@ namespace Burduhos_Raluca_Lab2.Models
                     if (bookCategories.Contains(cat.ID))
                     {
                         BookCategory courseToRemove
-                            = bookToUpdate
-                                .BookCategories
-                                .SingleOrDefault(i => i.CategoryID == cat.ID);
+                        = bookToUpdate
+                        .BookCategories
+                        .SingleOrDefault(i => i.CategoryID == cat.ID);
                         context.Remove(courseToRemove);
                     }
                 }
@@ -65,4 +64,5 @@ namespace Burduhos_Raluca_Lab2.Models
         }
     }
 }
-                
+
+

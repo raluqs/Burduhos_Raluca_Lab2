@@ -27,11 +27,11 @@
 @foreach (var item in Model.Author) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
+                    @Html.DisplayFor(modelItem => item.FirstName)
             </td>
 
             <td>
-                @Html.DisplayFor(modelItem => item.LastName)
+                    @Html.DisplayFor(modelItem => item.LastName)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
@@ -42,3 +42,5 @@
 }
     </tbody>
 </table>
+
+

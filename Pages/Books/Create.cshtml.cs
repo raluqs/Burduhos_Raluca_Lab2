@@ -21,8 +21,15 @@ namespace Burduhos_Raluca_Lab2.Pages.Books
 
         public IActionResult OnGet()
         {
-            ViewData["PublisherID"] = new SelectList(_context.Set<Publisher>(), "ID","PublisherName");
-            ViewData["AuthorID"] = new SelectList(_context.Set<Author>(), "ID", "AuthorName");
+            var authorList = _context.Author.Select(x => new
+            {
+                x.ID,
+                FullName = x.LastName + " " + x.FirstName
+            });
+
+            ViewData["PublisherID"] = new SelectList(_context.Set<Publisher>(), "ID", "PublisherName");
+            ViewData["AuthorID"] = new SelectList(_context.Set<Author>(), "ID", "AuthorFirstName");
+
             var book = new Book();
             book.BookCategories = new List<BookCategory>();
             PopulateAssignedCategoryData(_context, book);
@@ -34,6 +41,7 @@ namespace Burduhos_Raluca_Lab2.Pages.Books
 
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
+
         public async Task<IActionResult> OnPostAsync(string[] selectedCategories)
         {
             var newBook = new Book();

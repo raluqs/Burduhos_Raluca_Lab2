@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Burduhos_Raluca_Lab2.Data;
 using Burduhos_Raluca_Lab2.Models;
+using Burduhos_Raluca_Lab2.Models.ViewModels;
 
 namespace Burduhos_Raluca_Lab2.Pages.Authors
 {
@@ -18,15 +19,15 @@ namespace Burduhos_Raluca_Lab2.Pages.Authors
         {
             _context = context;
         }
+            public IList<Author> Author { get;set; } = default!;
 
-        public IList<Author> Author { get;set; } = default!;
-
-        public async Task OnGetAsync()
-        {
-            if (_context.Author != null)
+            public async Task OnGetAsync()
             {
-                Author = await _context.Author.ToListAsync();
+                if (_context.Author != null)
+                {
+                    Author = await _context.Author.ToListAsync();
+                }
             }
         }
     }
-}
+
