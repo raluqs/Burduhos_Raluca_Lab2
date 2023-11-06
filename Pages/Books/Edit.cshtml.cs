@@ -72,6 +72,7 @@ selectedCategories)
             }
             //se va include Author conform cu sarcina de la lab 2
             var bookToUpdate = await _context.Book
+              
                 .Include(i => i.Publisher)
                 .Include(i => i.Author)
                 .Include(i => i.BookCategories)
