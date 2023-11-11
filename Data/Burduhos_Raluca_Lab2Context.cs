@@ -27,3 +27,4 @@ namespace Burduhos_Raluca_Lab2.Data
         public DbSet<Burduhos_Raluca_Lab2.Models.Borrowing>? Borrowing { get; set; }
     }
 }
+

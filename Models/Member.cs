@@ -9,6 +9,10 @@ namespace Burduhos_Raluca_Lab2.Models
         public string? LastName { get; set; }
         public string? Adress { get; set; }
         public string Email { get; set; }
+        public Member()
+        {
+            Email = "";
+        }
         public string? Phone { get; set; }
         [Display(Name = "Full Name")]
         public string? FullName
