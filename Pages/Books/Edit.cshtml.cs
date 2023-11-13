@@ -8,9 +8,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Burduhos_Raluca_Lab2.Data;
 using Burduhos_Raluca_Lab2.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Burduhos_Raluca_Lab2.Pages.Books
 {
+    [Authorize(Roles = "Admin")]
+
     public class EditModel : BookCategoriesPageModel 
     {
         private readonly Burduhos_Raluca_Lab2.Data.Burduhos_Raluca_Lab2Context _context;
@@ -44,6 +47,12 @@ namespace Burduhos_Raluca_Lab2.Pages.Books
                 return NotFound();
             }
 
+            if (Book.Publisher == null)
+            {
+                Book.Publisher = new Publisher();
+            }
+
+
             //Book = book;
 
             PopulateAssignedCategoryData(_context, Book);
@@ -72,7 +81,6 @@ selectedCategories)
             }
             //se va include Author conform cu sarcina de la lab 2
             var bookToUpdate = await _context.Book
-              
                 .Include(i => i.Publisher)
                 .Include(i => i.Author)
                 .Include(i => i.BookCategories)
@@ -86,8 +94,11 @@ selectedCategories)
             if (await TryUpdateModelAsync<Book>(
                 bookToUpdate,
                 "Book",
-                i => i.Title, i => i.Author,
-                i => i.Price, i => i.PublishingDate, i => i.PublisherID))
+                i => i.Title,
+                i => i.AuthorID,
+                i => i.Price,
+                i => i.PublishingDate,
+                i => i.PublisherID))
             {
                 UpdateBookCategories(_context, selectedCategories, bookToUpdate);
                 await _context.SaveChangesAsync();

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Burduhos_Raluca_Lab2.Data;
 using Burduhos_Raluca_Lab2.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Burduhos_Raluca_Lab2.Pages.Books
 {
@@ -28,7 +29,9 @@ namespace Burduhos_Raluca_Lab2.Pages.Books
                 return NotFound();
             }
 
-            var book = await _context.Book.FirstOrDefaultAsync(m => m.ID == id);
+            var book = await _context.Book
+                
+                .FirstOrDefaultAsync(m => m.ID == id);
             if (book == null)
             {
                 return NotFound();

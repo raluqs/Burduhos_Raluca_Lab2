@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Burduhos_Raluca_Lab2.Data;
 using Burduhos_Raluca_Lab2.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Burduhos_Raluca_Lab2.Pages.Books
 {
+    [Authorize(Roles = "Admin")]
+
     public class CreateModel : BookCategoriesPageModel
     {
         private readonly Burduhos_Raluca_Lab2.Data.Burduhos_Raluca_Lab2Context _context;
